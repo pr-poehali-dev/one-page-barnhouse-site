@@ -8,6 +8,7 @@ import { useToast } from '@/hooks/use-toast';
 
 const Index = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -17,6 +18,7 @@ const Index = () => {
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     element?.scrollIntoView({ behavior: 'smooth' });
+    setIsMobileMenuOpen(false);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -44,8 +46,29 @@ const Index = () => {
                 </button>
               ))}
             </div>
-            <Button onClick={() => scrollToSection('контакты')}>Заказать проект</Button>
+            <Button className="hidden md:inline-flex" onClick={() => scrollToSection('контакты')}>Заказать проект</Button>
+            <button
+              className="md:hidden p-2"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Меню"
+            >
+              <Icon name={isMobileMenuOpen ? 'X' : 'Menu'} size={24} className="text-foreground" />
+            </button>
           </nav>
+          {isMobileMenuOpen && (
+            <div className="md:hidden mt-4 pb-4 space-y-3 animate-in fade-in slide-in-from-top-2 duration-200">
+              {['Главная', 'О компании', 'Проекты', 'Преимущества', 'Этапы', 'Отзывы', 'Контакты'].map((item) => (
+                <button
+                  key={item}
+                  onClick={() => scrollToSection(item.toLowerCase().replace(' ', '-'))}
+                  className="block w-full text-left py-2 px-4 text-foreground hover:text-primary hover:bg-secondary/50 rounded transition-colors"
+                >
+                  {item}
+                </button>
+              ))}
+              <Button className="w-full" onClick={() => scrollToSection('контакты')}>Заказать проект</Button>
+            </div>
+          )}
         </div>
       </header>
 
