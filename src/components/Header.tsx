@@ -30,6 +30,9 @@ const Header = ({ isMobileMenuOpen, setIsMobileMenuOpen, scrollToSection }: Head
             <Link to="/catalog" className="text-foreground hover:text-primary transition-colors font-medium">
               Каталог
             </Link>
+            <Link to="/calculator" className="text-foreground hover:text-primary transition-colors font-medium">
+              Калькулятор
+            </Link>
           </div>
           <Button className="hidden md:inline-flex" onClick={() => scrollToSection('контакты')}>
             Заказать звонок
@@ -53,6 +56,12 @@ const Header = ({ isMobileMenuOpen, setIsMobileMenuOpen, scrollToSection }: Head
                 {item}
               </button>
             ))}
+            <Link to="/catalog" className="block w-full text-left py-2 px-4 text-foreground hover:text-primary hover:bg-secondary/50 rounded transition-colors">
+              Каталог
+            </Link>
+            <Link to="/calculator" className="block w-full text-left py-2 px-4 text-foreground hover:text-primary hover:bg-secondary/50 rounded transition-colors">
+              Калькулятор
+            </Link>
             <Button className="w-full" onClick={() => scrollToSection('контакты')}>
               Заказать звонок
             </Button>
