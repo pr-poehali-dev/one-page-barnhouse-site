@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -103,10 +104,12 @@ const ContentSections = ({
             ))}
           </div>
           <div className="text-center mt-12">
-            <p className="text-muted-foreground mb-4">Не нашли подходящий проект?</p>
-            <Button variant="outline" size="lg" onClick={() => scrollToSection('контакты')}>
-              Заказать индивидуальный проект
-            </Button>
+            <p className="text-muted-foreground mb-4">Смотрите все проекты в каталоге</p>
+            <Link to="/catalog">
+              <Button variant="outline" size="lg">
+                Открыть каталог
+              </Button>
+            </Link>
           </div>
         </div>
       </section>

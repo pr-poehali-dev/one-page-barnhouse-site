@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 
@@ -26,6 +27,9 @@ const Header = ({ isMobileMenuOpen, setIsMobileMenuOpen, scrollToSection }: Head
                 {item}
               </button>
             ))}
+            <Link to="/catalog" className="text-foreground hover:text-primary transition-colors font-medium">
+              Каталог
+            </Link>
           </div>
           <Button className="hidden md:inline-flex" onClick={() => scrollToSection('контакты')}>
             Заказать звонок
