@@ -113,9 +113,9 @@ export const projects: Project[] = [
     rooms: 2,
     floors: 1,
     bathrooms: 1,
-    image: 'https://cdn.poehali.dev/projects/f31a50d7-5b0f-4848-a372-7a558bde3ebe/files/4d33329b-42b8-41c2-9512-72bbce2816f1.jpg',
+    image: 'https://cdn.poehali.dev/projects/f31a50d7-5b0f-4848-a372-7a558bde3ebe/files/02756560-5545-4e35-b1ee-2176091ee14d.jpg',
     images: [
-      'https://cdn.poehali.dev/projects/f31a50d7-5b0f-4848-a372-7a558bde3ebe/files/4d33329b-42b8-41c2-9512-72bbce2816f1.jpg',
+      'https://cdn.poehali.dev/projects/f31a50d7-5b0f-4848-a372-7a558bde3ebe/files/02756560-5545-4e35-b1ee-2176091ee14d.jpg',
       'https://cdn.poehali.dev/projects/f31a50d7-5b0f-4848-a372-7a558bde3ebe/files/9fe4a46f-f65e-426d-83ca-879a0e7dd5f2.jpg',
     ],
     features: ['Одноэтажный', 'Компактный', 'Терраса', 'Французские окна'],
