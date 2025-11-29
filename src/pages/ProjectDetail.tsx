@@ -14,13 +14,46 @@ const ProjectDetail = () => {
   const { toast } = useToast();
   const project = projects.find((p) => p.id === id);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    toast({
-      title: 'Заявка отправлена!',
-      description: 'Мы свяжемся с вами в ближайшее время.',
-    });
+    setIsSubmitting(true);
+
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get('name') as string,
+      phone: formData.get('phone') as string,
+      email: formData.get('email') as string,
+      project: project?.title || 'Не указан',
+      comment: formData.get('comment') as string,
+    };
+
+    try {
+      const response = await fetch('https://functions.poehali.dev/678bf41d-e2ef-4af3-b427-46d0d7a3c206', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        toast({
+          title: 'Заявка отправлена!',
+          description: 'Мы свяжемся с вами в ближайшее время',
+        });
+        e.currentTarget.reset();
+      } else {
+        throw new Error('Failed to send');
+      }
+    } catch (error) {
+      toast({
+        title: 'Ошибка отправки',
+        description: 'Попробуйте позже или позвоните нам',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (!project) {
@@ -203,22 +236,22 @@ const ProjectDetail = () => {
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium mb-2">Ваше имя</label>
-                    <Input placeholder="Иван Иванов" required />
+                    <Input name="name" placeholder="Иван Иванов" required />
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-2">Телефон</label>
-                    <Input type="tel" placeholder="+7 905 710 8890" required />
+                    <Input name="phone" type="tel" placeholder="+7 905 710 8890" required />
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-2">Email</label>
-                    <Input type="email" placeholder="pruddzen@gmail.com" />
+                    <Input name="email" type="email" placeholder="pruddzen@gmail.com" />
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-2">Комментарий</label>
-                    <Textarea placeholder="Ваши пожелания..." rows={3} />
+                    <Textarea name="comment" placeholder="Ваши пожелания..." rows={3} />
                   </div>
-                  <Button type="submit" className="w-full" size="lg">
-                    Отправить заявку
+                  <Button type="submit" className="w-full" size="lg" disabled={isSubmitting}>
+                    {isSubmitting ? 'Отправка...' : 'Отправить заявку'}
                   </Button>
                   <p className="text-xs text-muted-foreground text-center">
                     Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности

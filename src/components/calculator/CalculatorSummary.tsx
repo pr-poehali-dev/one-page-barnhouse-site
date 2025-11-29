@@ -1,17 +1,64 @@
+import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import Icon from '@/components/ui/icon';
+import { useToast } from '@/hooks/use-toast';
 import { CalculatorState, formatPrice } from './types';
 
 interface CalculatorSummaryProps {
   state: CalculatorState;
   totalPrice: number;
-  handleSubmit: (e: React.FormEvent) => void;
 }
 
-const CalculatorSummary = ({ state, totalPrice, handleSubmit }: CalculatorSummaryProps) => {
+const CalculatorSummary = ({ state, totalPrice }: CalculatorSummaryProps) => {
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    const formData = new FormData(e.currentTarget);
+    const calculatorDetails = `Площадь: ${state.area}м², Этажей: ${state.floors}, Фундамент: ${state.foundation}, Стены: ${state.walls}, Кровля: ${state.roof}, Окна: ${state.windows}, Отделка: ${state.finishing}, Итого: ${formatPrice(totalPrice)} ₽`;
+    
+    const data = {
+      name: formData.get('name') as string,
+      phone: formData.get('phone') as string,
+      email: formData.get('email') as string,
+      project: 'Расчет калькулятора',
+      comment: `${formData.get('comment') || ''}
+
+${calculatorDetails}`,
+    };
+
+    try {
+      const response = await fetch('https://functions.poehali.dev/678bf41d-e2ef-4af3-b427-46d0d7a3c206', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        toast({
+          title: 'Расчет отправлен!',
+          description: 'Мы свяжемся с вами в ближайшее время',
+        });
+        e.currentTarget.reset();
+      } else {
+        throw new Error('Failed to send');
+      }
+    } catch (error) {
+      toast({
+        title: 'Ошибка отправки',
+        description: 'Попробуйте позже или позвоните нам',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
     <Card className="sticky top-24">
       <CardContent className="p-6">
@@ -60,12 +107,12 @@ const CalculatorSummary = ({ state, totalPrice, handleSubmit }: CalculatorSummar
         <div className="border-t pt-4 mb-6">
           <h3 className="font-semibold mb-3">Получить точный расчет</h3>
           <form onSubmit={handleSubmit} className="space-y-3">
-            <Input placeholder="Ваше имя" required />
-            <Input type="tel" placeholder="+7 905 710 8890" required />
-            <Input type="email" placeholder="Email" />
-            <Textarea placeholder="Комментарий" rows={2} />
-            <Button type="submit" className="w-full">
-              Отправить расчет
+            <Input name="name" placeholder="Ваше имя" required />
+            <Input name="phone" type="tel" placeholder="+7 905 710 8890" required />
+            <Input name="email" type="email" placeholder="Email" />
+            <Textarea name="comment" placeholder="Комментарий" rows={2} />
+            <Button type="submit" className="w-full" disabled={isSubmitting}>
+              {isSubmitting ? 'Отправка...' : 'Отправить расчет'}
             </Button>
           </form>
         </div>

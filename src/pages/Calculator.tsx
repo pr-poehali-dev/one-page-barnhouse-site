@@ -58,13 +58,7 @@ const Calculator = () => {
     setTotalPrice(Math.round(total));
   }, [state]);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast({
-      title: 'Расчет отправлен!',
-      description: 'Мы свяжемся с вами для уточнения деталей.',
-    });
-  };
+
 
   return (
     <div className="min-h-screen bg-background">
@@ -104,7 +98,7 @@ const Calculator = () => {
           </div>
 
           <div className="lg:col-span-1">
-            <CalculatorSummary state={state} totalPrice={totalPrice} handleSubmit={handleSubmit} />
+            <CalculatorSummary state={state} totalPrice={totalPrice} />
           </div>
         </div>
       </div>

@@ -21,13 +21,7 @@ const Index = () => {
     setIsMobileMenuOpen(false);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast({
-      title: 'Заявка отправлена!',
-      description: 'Мы свяжемся с вами в ближайшее время.',
-    });
-  };
+
 
   const projects = [
     {
@@ -209,7 +203,7 @@ const Index = () => {
         testimonials={testimonials}
         faqs={faqs}
       />
-      <ContactSection handleSubmit={handleSubmit} />
+      <ContactSection />
       <Footer scrollToSection={scrollToSection} />
     </div>
   );

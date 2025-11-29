@@ -1,15 +1,55 @@
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
+import { useToast } from '@/hooks/use-toast';
 
-interface ContactSectionProps {
-  handleSubmit: (e: React.FormEvent) => void;
-}
+const ContactSection = () => {
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-const ContactSection = ({ handleSubmit }: ContactSectionProps) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get('name') as string,
+      phone: formData.get('phone') as string,
+      email: formData.get('email') as string,
+      project: formData.get('project') as string,
+      comment: formData.get('comment') as string,
+    };
+
+    try {
+      const response = await fetch('https://functions.poehali.dev/678bf41d-e2ef-4af3-b427-46d0d7a3c206', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        toast({
+          title: 'Заявка отправлена!',
+          description: 'Мы свяжемся с вами в ближайшее время',
+        });
+        e.currentTarget.reset();
+      } else {
+        throw new Error('Failed to send');
+      }
+    } catch (error) {
+      toast({
+        title: 'Ошибка отправки',
+        description: 'Попробуйте позже или позвоните нам',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
     <section id="контакты" className="py-20 px-4 bg-secondary/20">
       <div className="container mx-auto max-w-5xl">
@@ -27,19 +67,19 @@ const ContactSection = ({ handleSubmit }: ContactSectionProps) => {
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium mb-2">Ваше имя</label>
-                  <Input placeholder="Иван Иванов" required />
+                  <Input name="name" placeholder="Иван Иванов" required />
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-2">Телефон</label>
-                  <Input type="tel" placeholder="+7 905 710 8890" required />
+                  <Input name="phone" type="tel" placeholder="+7 905 710 8890" required />
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-2">Email</label>
-                  <Input type="email" placeholder="pruddzen@gmail.com" />
+                  <Input name="email" type="email" placeholder="pruddzen@gmail.com" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-2">Интересующий проект</label>
-                  <select className="w-full px-3 py-2 border rounded-md">
+                  <select name="project" className="w-full px-3 py-2 border rounded-md">
                     <option>Скандинавия</option>
                     <option>Минимализм</option>
                     <option>Панорама</option>
@@ -48,10 +88,10 @@ const ContactSection = ({ handleSubmit }: ContactSectionProps) => {
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-2">Комментарий</label>
-                  <Textarea placeholder="Расскажите о ваших пожеланиях..." rows={4} />
+                  <Textarea name="comment" placeholder="Расскажите о ваших пожеланиях..." rows={4} />
                 </div>
-                <Button type="submit" className="w-full" size="lg">
-                  Отправить заявку
+                <Button type="submit" className="w-full" size="lg" disabled={isSubmitting}>
+                  {isSubmitting ? 'Отправка...' : 'Отправить заявку'}
                 </Button>
                 <p className="text-xs text-muted-foreground text-center">
                   Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности
