@@ -61,7 +61,7 @@ const CalculatorSummary = ({ state, totalPrice, handleSubmit }: CalculatorSummar
           <h3 className="font-semibold mb-3">Получить точный расчет</h3>
           <form onSubmit={handleSubmit} className="space-y-3">
             <Input placeholder="Ваше имя" required />
-            <Input type="tel" placeholder="+7 (999) 123-45-67" required />
+            <Input type="tel" placeholder="+7 905 710 8890" required />
             <Input type="email" placeholder="Email" />
             <Textarea placeholder="Комментарий" rows={2} />
             <Button type="submit" className="w-full">

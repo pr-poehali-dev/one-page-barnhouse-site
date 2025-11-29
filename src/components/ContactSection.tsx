@@ -31,7 +31,7 @@ const ContactSection = ({ handleSubmit }: ContactSectionProps) => {
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-2">Телефон</label>
-                  <Input type="tel" placeholder="+7 (999) 123-45-67" required />
+                  <Input type="tel" placeholder="+7 905 710 8890" required />
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-2">Email</label>
@@ -68,8 +68,8 @@ const ContactSection = ({ handleSubmit }: ContactSectionProps) => {
                     <Icon name="Phone" className="text-primary mt-1" size={20} />
                     <div>
                       <div className="font-semibold">Телефон</div>
-                      <a href="tel:+79991234567" className="text-muted-foreground hover:text-primary">
-                        +7 (999) 123-45-67
+                      <a href="tel:+79057108890" className="text-muted-foreground hover:text-primary">
+                        +7 905 710 8890
                       </a>
                     </div>
                   </div>

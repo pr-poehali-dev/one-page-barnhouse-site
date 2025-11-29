@@ -207,7 +207,7 @@ const ProjectDetail = () => {
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-2">Телефон</label>
-                    <Input type="tel" placeholder="+7 (999) 123-45-67" required />
+                    <Input type="tel" placeholder="+7 905 710 8890" required />
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-2">Email</label>
@@ -234,9 +234,9 @@ const ProjectDetail = () => {
                   Наши специалисты ответят на все вопросы и помогут с выбором проекта
                 </p>
                 <div className="space-y-2 text-sm">
-                  <a href="tel:+79991234567" className="flex items-center gap-2 hover:text-primary">
+                  <a href="tel:+79057108890" className="flex items-center gap-2 hover:text-primary">
                     <Icon name="Phone" size={16} />
-                    +7 (999) 123-45-67
+                    +7 905 710 8890
                   </a>
                   <a href="mailto:info@barnhouse.ru" className="flex items-center gap-2 hover:text-primary">
                     <Icon name="Mail" size={16} />
