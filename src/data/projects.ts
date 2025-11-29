@@ -49,9 +49,9 @@ export const projects: Project[] = [
     rooms: 4,
     floors: 2,
     bathrooms: 2,
-    image: 'https://cdn.poehali.dev/projects/f31a50d7-5b0f-4848-a372-7a558bde3ebe/files/db862ec1-39b4-40b4-bb43-b9dbc0ae4a34.jpg',
+    image: 'https://cdn.poehali.dev/projects/f31a50d7-5b0f-4848-a372-7a558bde3ebe/files/132cb969-e040-4295-a6cd-3fa853e2d5b1.jpg',
     images: [
-      'https://cdn.poehali.dev/projects/f31a50d7-5b0f-4848-a372-7a558bde3ebe/files/db862ec1-39b4-40b4-bb43-b9dbc0ae4a34.jpg',
+      'https://cdn.poehali.dev/projects/f31a50d7-5b0f-4848-a372-7a558bde3ebe/files/132cb969-e040-4295-a6cd-3fa853e2d5b1.jpg',
       'https://cdn.poehali.dev/projects/f31a50d7-5b0f-4848-a372-7a558bde3ebe/files/ecd0815c-1fa8-4486-8a2a-f84f0e79b1c7.jpg',
     ],
     features: ['Гараж на 2 авто', 'Второй свет', 'Smart-home', 'Плоская кровля'],
