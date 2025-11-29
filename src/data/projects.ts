@@ -92,9 +92,9 @@ export const projects: Project[] = [
     rooms: 3,
     floors: 2,
     bathrooms: 2,
-    image: 'https://cdn.poehali.dev/projects/f31a50d7-5b0f-4848-a372-7a558bde3ebe/files/33d81095-af8c-4e01-a4dc-d3db6f67fa7f.jpg',
+    image: 'https://cdn.poehali.dev/projects/f31a50d7-5b0f-4848-a372-7a558bde3ebe/files/b59fb467-c980-4768-b3fc-4a142592b1e8.jpg',
     images: [
-      'https://cdn.poehali.dev/projects/f31a50d7-5b0f-4848-a372-7a558bde3ebe/files/33d81095-af8c-4e01-a4dc-d3db6f67fa7f.jpg',
+      'https://cdn.poehali.dev/projects/f31a50d7-5b0f-4848-a372-7a558bde3ebe/files/b59fb467-c980-4768-b3fc-4a142592b1e8.jpg',
       'https://cdn.poehali.dev/projects/f31a50d7-5b0f-4848-a372-7a558bde3ebe/files/8b94cfcc-3131-4f34-a623-5bb6ada5d10b.jpg',
     ],
     features: ['Двускатная кровля', 'Камин', 'Крыльцо', 'Кабинет'],
