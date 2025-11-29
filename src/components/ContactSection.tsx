@@ -35,7 +35,7 @@ const ContactSection = ({ handleSubmit }: ContactSectionProps) => {
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-2">Email</label>
-                  <Input type="email" placeholder="ivan@example.com" />
+                  <Input type="email" placeholder="pruddzen@gmail.com" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-2">Интересующий проект</label>
@@ -77,8 +77,8 @@ const ContactSection = ({ handleSubmit }: ContactSectionProps) => {
                     <Icon name="Mail" className="text-primary mt-1" size={20} />
                     <div>
                       <div className="font-semibold">Email</div>
-                      <a href="mailto:info@barnhouse.ru" className="text-muted-foreground hover:text-primary">
-                        info@barnhouse.ru
+                      <a href="mailto:pruddzen@gmail.com" className="text-muted-foreground hover:text-primary">
+                        pruddzen@gmail.com
                       </a>
                     </div>
                   </div>

@@ -211,7 +211,7 @@ const ProjectDetail = () => {
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-2">Email</label>
-                    <Input type="email" placeholder="ivan@example.com" />
+                    <Input type="email" placeholder="pruddzen@gmail.com" />
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-2">Комментарий</label>
@@ -238,9 +238,9 @@ const ProjectDetail = () => {
                     <Icon name="Phone" size={16} />
                     +7 905 710 8890
                   </a>
-                  <a href="mailto:info@barnhouse.ru" className="flex items-center gap-2 hover:text-primary">
+                  <a href="mailto:pruddzen@gmail.com" className="flex items-center gap-2 hover:text-primary">
                     <Icon name="Mail" size={16} />
-                    info@barnhouse.ru
+                    pruddzen@gmail.com
                   </a>
                 </div>
               </CardContent>

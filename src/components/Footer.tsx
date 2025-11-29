@@ -36,7 +36,7 @@ const Footer = ({ scrollToSection }: FooterProps) => {
             <h4 className="font-semibold mb-4">Контакты</h4>
             <div className="space-y-2 text-sm opacity-80">
               <div>+7 905 710 8890</div>
-              <div>info@barnhouse.ru</div>
+              <div>pruddzen@gmail.com</div>
               <div>г. Москва, ул. Строителей, 15</div>
             </div>
           </div>
