@@ -52,8 +52,6 @@ export const projects: Project[] = [
     image: 'https://cdn.poehali.dev/projects/f31a50d7-5b0f-4848-a372-7a558bde3ebe/files/fe9b5019-8a7c-4a12-9ae5-6a41518040fa.jpg',
     images: [
       'https://cdn.poehali.dev/projects/f31a50d7-5b0f-4848-a372-7a558bde3ebe/files/fe9b5019-8a7c-4a12-9ae5-6a41518040fa.jpg',
-      'https://cdn.poehali.dev/projects/f31a50d7-5b0f-4848-a372-7a558bde3ebe/files/ecd0815c-1fa8-4486-8a2a-f84f0e79b1c7.jpg',
-      'https://cdn.poehali.dev/projects/f31a50d7-5b0f-4848-a372-7a558bde3ebe/files/ad7de8b0-9a87-4756-80fe-1aad7a8413db.jpg',
     ],
     features: ['Гараж на 2 авто', 'Второй свет', 'Smart-home', 'Плоская кровля'],
     description: 'Современный дом с чистыми линиями и функциональными пространствами',
