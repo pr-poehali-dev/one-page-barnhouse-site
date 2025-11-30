@@ -1,8 +1,6 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
-import CallbackModal from './CallbackModal';
 
 interface HeaderProps {
   isMobileMenuOpen: boolean;
@@ -11,7 +9,6 @@ interface HeaderProps {
 }
 
 const Header = ({ isMobileMenuOpen, setIsMobileMenuOpen, scrollToSection }: HeaderProps) => {
-  const [isCallbackModalOpen, setIsCallbackModalOpen] = useState(false);
   return (
     <header className="fixed top-0 w-full bg-white/95 backdrop-blur-sm shadow-sm z-50">
       <div className="container mx-auto px-4 py-4">
@@ -37,7 +34,7 @@ const Header = ({ isMobileMenuOpen, setIsMobileMenuOpen, scrollToSection }: Head
               Калькулятор
             </Link>
           </div>
-          <Button className="hidden md:inline-flex" onClick={() => setIsCallbackModalOpen(true)}>
+          <Button className="hidden md:inline-flex" onClick={() => scrollToSection('контакты')}>
             Заказать звонок
           </Button>
           <button
@@ -65,13 +62,12 @@ const Header = ({ isMobileMenuOpen, setIsMobileMenuOpen, scrollToSection }: Head
             <Link to="/calculator" className="block w-full text-left py-2 px-4 text-foreground hover:text-primary hover:bg-secondary/50 rounded transition-colors">
               Калькулятор
             </Link>
-            <Button className="w-full" onClick={() => setIsCallbackModalOpen(true)}>
+            <Button className="w-full" onClick={() => scrollToSection('контакты')}>
               Заказать звонок
             </Button>
           </div>
         )}
       </div>
-      <CallbackModal isOpen={isCallbackModalOpen} onClose={() => setIsCallbackModalOpen(false)} />
     </header>
   );
 };

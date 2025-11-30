@@ -1,8 +1,6 @@
-import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
-import CallbackModal from './CallbackModal';
 
 interface HeroSectionProps {
   isVisible: boolean;
@@ -10,7 +8,6 @@ interface HeroSectionProps {
 }
 
 const HeroSection = ({ isVisible, scrollToSection }: HeroSectionProps) => {
-  const [isCallbackModalOpen, setIsCallbackModalOpen] = useState(false);
   return (
     <section id="главная" className="pt-32 pb-20 px-4 bg-gradient-to-b from-secondary/20 to-background">
       <div className="container mx-auto">
@@ -44,7 +41,7 @@ const HeroSection = ({ isVisible, scrollToSection }: HeroSectionProps) => {
               <Button size="lg" onClick={() => scrollToSection('проекты')} className="px-8">
                 Наши проекты
               </Button>
-              <Button size="lg" variant="outline" onClick={() => setIsCallbackModalOpen(true)} className="px-8">
+              <Button size="lg" variant="outline" onClick={() => scrollToSection('контакты')} className="px-8">
                 Бесплатная консультация
               </Button>
             </div>
@@ -64,7 +61,6 @@ const HeroSection = ({ isVisible, scrollToSection }: HeroSectionProps) => {
           </div>
         </div>
       </div>
-      <CallbackModal isOpen={isCallbackModalOpen} onClose={() => setIsCallbackModalOpen(false)} />
     </section>
   );
 };
