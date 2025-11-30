@@ -37,17 +37,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     project = body_data.get('project', '')
     comment = body_data.get('comment', '')
     
-    access_key = os.environ.get('WEB3FORMS_ACCESS_KEY')
-    
-    if not access_key:
-        return {
-            'statusCode': 500,
-            'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
-            'body': json.dumps({'error': 'Web3Forms key not configured'})
-        }
-    
     web3forms_data = {
-        'access_key': access_key,
+        'access_key': 'e63bdfc2-7705-44f4-ba9d-9e67ed8801ef',
         'name': name,
         'email': email,
         'phone': phone,
