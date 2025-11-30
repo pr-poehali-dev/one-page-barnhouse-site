@@ -25,13 +25,22 @@ const ContactSection = () => {
     };
 
     try {
-      const response = await fetch('https://functions.poehali.dev/678bf41d-e2ef-4af3-b427-46d0d7a3c206', {
+      const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          access_key: 'YOUR_WEB3FORMS_KEY',
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          subject: `Новая заявка: ${data.project}`,
+          message: `Проект: ${data.project}\nТелефон: ${data.phone}\nКомментарий: ${data.comment}`,
+        }),
       });
 
-      if (response.ok) {
+      const result = await response.json();
+
+      if (result.success) {
         toast({
           title: 'Заявка отправлена!',
           description: 'Мы свяжемся с вами в ближайшее время',
