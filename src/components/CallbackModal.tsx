@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import Icon from '@/components/ui/icon';
@@ -107,6 +107,9 @@ const CallbackModal = ({ isOpen, onClose }: CallbackModalProps) => {
         )}
         <DialogHeader>
           <DialogTitle className="text-2xl">Заказать обратный звонок</DialogTitle>
+          <DialogDescription>
+            Оставьте ваши контактные данные, и мы свяжемся с вами в ближайшее время
+          </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4 mt-4">
           <div>
