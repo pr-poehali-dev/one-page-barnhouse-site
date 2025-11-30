@@ -40,10 +40,12 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     web3forms_data = {
         'access_key': 'e63bdfc2-7705-44f4-ba9d-9e67ed8801ef',
         'name': name,
-        'email': email,
+        'email': 'ruslan399885@gmail.com',
+        'from_name': name,
+        'from_email': email,
         'phone': phone,
         'subject': f'Новая заявка: {project}',
-        'message': f'Проект: {project}\nТелефон: {phone}\nEmail: {email}\nКомментарий: {comment}'
+        'message': f'Проект: {project}\nТелефон: {phone}\nEmail клиента: {email}\nКомментарий: {comment}'
     }
     
     try:
