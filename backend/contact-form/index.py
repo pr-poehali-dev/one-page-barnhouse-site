@@ -42,7 +42,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     smtp_host = os.environ.get('SMTP_HOST', 'smtp.gmail.com')
     smtp_port = int(os.environ.get('SMTP_PORT', '587'))
     smtp_user = os.environ.get('SMTP_USER', 'ruslan399885@gmail.com')
-    smtp_password = os.environ.get('SMTP_PASSWORD', '')
+    smtp_password = os.environ.get('SMTP_PASSWORD', 'ruejntjtlyjshmei')
     
     msg = MIMEMultipart('alternative')
     msg['Subject'] = f'Новая заявка с сайта BarnHouse: {project}'
