@@ -94,49 +94,48 @@ const CallbackModal = ({ isOpen, onClose }: CallbackModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md relative overflow-hidden">
+      <DialogContent className="sm:max-w-sm max-w-[90vw] p-5 relative overflow-hidden animate-in slide-in-from-bottom-4 duration-300">
         {showSuccess && (
           <div className="absolute inset-0 bg-green-500/95 backdrop-blur-sm z-50 flex items-center justify-center animate-in fade-in zoom-in duration-300">
-            <div className="text-center text-white">
-              <Icon name="CheckCircle2" size={64} className="mx-auto mb-4 animate-bounce" />
-              <h4 className="text-2xl font-bold mb-2">Отлично!</h4>
-              <p className="text-lg">Ваша заявка успешно отправлена</p>
-              <p className="text-sm mt-2 opacity-90">Мы перезвоним вам в ближайшее время</p>
+            <div className="text-center text-white px-4">
+              <Icon name="CheckCircle2" size={48} className="mx-auto mb-3 animate-bounce" />
+              <h4 className="text-xl font-bold mb-1">Отлично!</h4>
+              <p className="text-sm">Мы перезвоним вам в ближайшее время</p>
             </div>
           </div>
         )}
         <DialogHeader>
-          <DialogTitle className="text-2xl">Заказать обратный звонок</DialogTitle>
-          <DialogDescription>
-            Оставьте ваши контактные данные, и мы свяжемся с вами в ближайшее время
+          <DialogTitle className="text-lg">Заказать обратный звонок</DialogTitle>
+          <DialogDescription className="text-xs">
+            Оставьте контакты, мы свяжемся с вами
           </DialogDescription>
         </DialogHeader>
-        <form onSubmit={handleSubmit} className="space-y-4 mt-4">
+        <form onSubmit={handleSubmit} className="space-y-3 mt-2">
           <div>
-            <label className="block text-sm font-medium mb-2">Ваше имя</label>
+            <label className="block text-xs font-medium mb-1">Ваше имя</label>
             <Input 
               name="name" 
               placeholder="Иван Иванов" 
               required 
-              className={errors.name ? 'border-red-500' : ''} 
+              className={errors.name ? 'border-red-500 h-9' : 'h-9'} 
             />
             {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2">Телефон</label>
+            <label className="block text-xs font-medium mb-1">Телефон</label>
             <Input 
               name="phone" 
               type="tel" 
               placeholder="+7 905 710 8890" 
               required 
-              className={errors.phone ? 'border-red-500' : ''} 
+              className={errors.phone ? 'border-red-500 h-9' : 'h-9'} 
             />
             {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
           </div>
-          <Button type="submit" className="w-full" size="lg" disabled={isSubmitting}>
+          <Button type="submit" className="w-full h-9" disabled={isSubmitting}>
             {isSubmitting ? 'Отправка...' : 'Заказать звонок'}
           </Button>
-          <p className="text-xs text-muted-foreground text-center">
+          <p className="text-[10px] text-muted-foreground text-center leading-tight">
             Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности
           </p>
         </form>
