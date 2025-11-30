@@ -25,17 +25,10 @@ const ContactSection = () => {
     };
 
     try {
-      const response = await fetch('https://api.web3forms.com/submit', {
+      const response = await fetch('https://functions.poehali.dev/3a37d2bc-1923-4ec9-894f-88eb4aa4b1f6', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          access_key: 'YOUR_WEB3FORMS_KEY',
-          name: data.name,
-          email: data.email,
-          phone: data.phone,
-          subject: `Новая заявка: ${data.project}`,
-          message: `Проект: ${data.project}\nТелефон: ${data.phone}\nКомментарий: ${data.comment}`,
-        }),
+        body: JSON.stringify(data),
       });
 
       const result = await response.json();
