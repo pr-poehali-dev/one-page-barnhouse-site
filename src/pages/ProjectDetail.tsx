@@ -15,10 +15,35 @@ const ProjectDetail = () => {
   const project = projects.find((p) => p.id === id);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [showSuccess, setShowSuccess] = useState(false);
+
+  const validateForm = (data: Record<string, string>) => {
+    const newErrors: Record<string, string> = {};
+
+    if (!data.name.trim() || data.name.trim().length < 2) {
+      newErrors.name = 'Имя должно содержать минимум 2 символа';
+    }
+
+    const phoneRegex = /^\+?[0-9]{10,15}$/;
+    const cleanPhone = data.phone.replace(/[\s()-]/g, '');
+    if (!phoneRegex.test(cleanPhone)) {
+      newErrors.phone = 'Введите корректный номер телефона';
+    }
+
+    if (data.email && data.email.trim()) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(data.email)) {
+        newErrors.email = 'Введите корректный email';
+      }
+    }
+
+    return newErrors;
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsSubmitting(true);
+    setErrors({});
 
     const formData = new FormData(e.currentTarget);
     const data = {
@@ -29,19 +54,36 @@ const ProjectDetail = () => {
       comment: formData.get('comment') as string,
     };
 
+    const validationErrors = validateForm(data);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      toast({
+        title: 'Проверьте заполнение формы',
+        description: 'Некоторые поля содержат ошибки',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+
     try {
-      const response = await fetch('https://functions.poehali.dev/678bf41d-e2ef-4af3-b427-46d0d7a3c206', {
+      const response = await fetch('https://functions.poehali.dev/3a37d2bc-1923-4ec9-894f-88eb4aa4b1f6', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
 
-      if (response.ok) {
+      const result = await response.json();
+
+      if (result.success) {
+        setShowSuccess(true);
+        e.currentTarget.reset();
+        setTimeout(() => setShowSuccess(false), 5000);
         toast({
-          title: 'Заявка отправлена!',
+          title: '✅ Заявка отправлена!',
           description: 'Мы свяжемся с вами в ближайшее время',
         });
-        e.currentTarget.reset();
       } else {
         throw new Error('Failed to send');
       }
@@ -230,21 +272,34 @@ const ProjectDetail = () => {
           </div>
 
           <div className="lg:col-span-1">
-            <Card className="sticky top-24">
+            <Card className="sticky top-24 relative overflow-hidden">
+              {showSuccess && (
+                <div className="absolute inset-0 bg-green-500/95 backdrop-blur-sm z-10 flex items-center justify-center animate-in fade-in zoom-in duration-300">
+                  <div className="text-center text-white">
+                    <Icon name="CheckCircle2" size={64} className="mx-auto mb-4 animate-bounce" />
+                    <h4 className="text-2xl font-bold mb-2">Отлично!</h4>
+                    <p className="text-lg">Ваша заявка успешно отправлена</p>
+                    <p className="text-sm mt-2 opacity-90">Мы свяжемся с вами в ближайшее время</p>
+                  </div>
+                </div>
+              )}
               <CardContent className="p-6">
                 <h3 className="text-xl font-bold mb-4">Заказать проект</h3>
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium mb-2">Ваше имя</label>
-                    <Input name="name" placeholder="Иван Иванов" required />
+                    <Input name="name" placeholder="Иван Иванов" required className={errors.name ? 'border-red-500' : ''} />
+                    {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-2">Телефон</label>
-                    <Input name="phone" type="tel" placeholder="+7 905 710 8890" required />
+                    <Input name="phone" type="tel" placeholder="+7 905 710 8890" required className={errors.phone ? 'border-red-500' : ''} />
+                  {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-2">Email</label>
-                    <Input name="email" type="email" placeholder="pruddzen@gmail.com" />
+                    <Input name="email" type="email" placeholder="pruddzen@gmail.com" className={errors.email ? 'border-red-500' : ''} />
+                  {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-2">Комментарий</label>
