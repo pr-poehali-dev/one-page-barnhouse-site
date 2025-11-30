@@ -10,10 +10,34 @@ import { useToast } from '@/hooks/use-toast';
 const ContactSection = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const validateForm = (data: Record<string, string>) => {
+    const newErrors: Record<string, string> = {};
+
+    if (!data.name.trim() || data.name.trim().length < 2) {
+      newErrors.name = 'Имя должно содержать минимум 2 символа';
+    }
+
+    const phoneRegex = /^\+?[0-9]{10,15}$/;
+    const cleanPhone = data.phone.replace(/[\s()-]/g, '');
+    if (!phoneRegex.test(cleanPhone)) {
+      newErrors.phone = 'Введите корректный номер телефона';
+    }
+
+    if (data.email && data.email.trim()) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(data.email)) {
+        newErrors.email = 'Введите корректный email';
+      }
+    }
+
+    return newErrors;
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsSubmitting(true);
+    setErrors({});
 
     const formData = new FormData(e.currentTarget);
     const data = {
@@ -23,6 +47,19 @@ const ContactSection = () => {
       project: formData.get('project') as string,
       comment: formData.get('comment') as string,
     };
+
+    const validationErrors = validateForm(data);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      toast({
+        title: 'Проверьте заполнение формы',
+        description: 'Некоторые поля содержат ошибки',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
 
     try {
       const response = await fetch('https://functions.poehali.dev/3a37d2bc-1923-4ec9-894f-88eb4aa4b1f6', {
@@ -69,15 +106,18 @@ const ContactSection = () => {
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium mb-2">Ваше имя</label>
-                  <Input name="name" placeholder="Иван Иванов" required />
+                  <Input name="name" placeholder="Иван Иванов" required className={errors.name ? 'border-red-500' : ''} />
+                  {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-2">Телефон</label>
-                  <Input name="phone" type="tel" placeholder="+7 905 710 8890" required />
+                  <Input name="phone" type="tel" placeholder="+7 905 710 8890" required className={errors.phone ? 'border-red-500' : ''} />
+                  {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-2">Email</label>
-                  <Input name="email" type="email" placeholder="pruddzen@gmail.com" />
+                  <Input name="email" type="email" placeholder="pruddzen@gmail.com" className={errors.email ? 'border-red-500' : ''} />
+                  {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-2">Интересующий проект</label>
