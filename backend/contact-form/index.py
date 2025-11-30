@@ -51,7 +51,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     try:
         data = urllib.parse.urlencode(form_data).encode('utf-8')
         req = urllib.request.Request(
-            'https://formsubmit.co/ruslan399885@gmail.com',
+            'https://formsubmit.co/pruddzen@gmail.com',
             data=data,
             headers={'Content-Type': 'application/x-www-form-urlencoded'}
         )
