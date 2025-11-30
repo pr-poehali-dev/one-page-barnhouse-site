@@ -1,11 +1,13 @@
 import json
-import urllib.request
-import urllib.parse
+import smtplib
+import os
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 from typing import Dict, Any
 
 def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     '''
-    Business: Send contact form data via FormSubmit service
+    Business: Send contact form data via SMTP email
     Args: event with httpMethod POST, body with name, phone, email, project, comment
     Returns: HTTP response with success/error status
     '''
@@ -31,39 +33,69 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         }
     
     body_data = json.loads(event.get('body', '{}'))
-    name = body_data.get('name', '')
-    phone = body_data.get('phone', '')
-    client_email = body_data.get('email', '')
-    project = body_data.get('project', '')
-    comment = body_data.get('comment', '')
+    name = body_data.get('name', 'Не указано')
+    phone = body_data.get('phone', 'Не указан')
+    client_email = body_data.get('email', 'Не указан')
+    project = body_data.get('project', 'Не указан')
+    comment = body_data.get('comment', 'Без комментариев')
     
-    form_data = {
-        '_subject': f'Новая заявка с сайта BarnHouse: {project}',
-        '_captcha': 'false',
-        '_template': 'table',
-        'Имя': name,
-        'Телефон': phone,
-        'Email клиента': client_email,
-        'Интересующий проект': project,
-        'Комментарий': comment
-    }
+    smtp_host = os.environ.get('SMTP_HOST', 'smtp.gmail.com')
+    smtp_port = int(os.environ.get('SMTP_PORT', '587'))
+    smtp_user = os.environ.get('SMTP_USER', 'pruddzen@gmail.com')
+    smtp_password = os.environ.get('SMTP_PASSWORD', 'babztqlexrecrfid')
+    
+    msg = MIMEMultipart('alternative')
+    msg['Subject'] = f'Новая заявка с сайта BarnHouse: {project}'
+    msg['From'] = smtp_user
+    msg['To'] = 'pruddzen@gmail.com'
+    
+    html_body = f'''
+    <html>
+    <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+        <h2 style="color: #2563eb;">Новая заявка с сайта BarnHouse</h2>
+        <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+                <td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>Имя:</strong></td>
+                <td style="padding: 10px; border-bottom: 1px solid #eee;">{name}</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>Телефон:</strong></td>
+                <td style="padding: 10px; border-bottom: 1px solid #eee;">{phone}</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>Email клиента:</strong></td>
+                <td style="padding: 10px; border-bottom: 1px solid #eee;">{client_email}</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>Интересующий проект:</strong></td>
+                <td style="padding: 10px; border-bottom: 1px solid #eee;">{project}</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border-bottom: 1px solid #eee; vertical-align: top;"><strong>Комментарий:</strong></td>
+                <td style="padding: 10px; border-bottom: 1px solid #eee;">{comment}</td>
+            </tr>
+        </table>
+        <p style="margin-top: 20px; color: #666; font-size: 12px;">
+            Это письмо отправлено автоматически с сайта BarnHouse
+        </p>
+    </body>
+    </html>
+    '''
+    
+    msg.attach(MIMEText(html_body, 'html'))
     
     try:
-        data = urllib.parse.urlencode(form_data).encode('utf-8')
-        req = urllib.request.Request(
-            'https://formsubmit.co/pruddzen@gmail.com',
-            data=data,
-            headers={'Content-Type': 'application/x-www-form-urlencoded'}
-        )
+        with smtplib.SMTP(smtp_host, smtp_port) as server:
+            server.starttls()
+            server.login(smtp_user, smtp_password)
+            server.send_message(msg)
         
-        with urllib.request.urlopen(req) as response:
-            return {
-                'statusCode': 200,
-                'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
-                'isBase64Encoded': False,
-                'body': json.dumps({'success': True})
-            }
-    
+        return {
+            'statusCode': 200,
+            'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+            'isBase64Encoded': False,
+            'body': json.dumps({'success': True, 'message': 'Email sent successfully'})
+        }
     except Exception as e:
         return {
             'statusCode': 500,
