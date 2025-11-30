@@ -11,6 +11,7 @@ const ContactSection = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const validateForm = (data: Record<string, string>) => {
     const newErrors: Record<string, string> = {};
@@ -71,11 +72,13 @@ const ContactSection = () => {
       const result = await response.json();
 
       if (result.success) {
+        setShowSuccess(true);
+        e.currentTarget.reset();
+        setTimeout(() => setShowSuccess(false), 5000);
         toast({
-          title: 'Заявка отправлена!',
+          title: '✅ Заявка отправлена!',
           description: 'Мы свяжемся с вами в ближайшее время',
         });
-        e.currentTarget.reset();
       } else {
         throw new Error('Failed to send');
       }
@@ -100,7 +103,17 @@ const ContactSection = () => {
           </p>
         </div>
         <div className="grid lg:grid-cols-2 gap-8">
-          <Card className="border-none shadow-lg">
+          <Card className="border-none shadow-lg relative overflow-hidden">
+            {showSuccess && (
+              <div className="absolute inset-0 bg-green-500/95 backdrop-blur-sm z-10 flex items-center justify-center animate-in fade-in zoom-in duration-300">
+                <div className="text-center text-white">
+                  <Icon name="CheckCircle2" size={64} className="mx-auto mb-4 animate-bounce" />
+                  <h4 className="text-2xl font-bold mb-2">Отлично!</h4>
+                  <p className="text-lg">Ваша заявка успешно отправлена</p>
+                  <p className="text-sm mt-2 opacity-90">Мы свяжемся с вами в ближайшее время</p>
+                </div>
+              </div>
+            )}
             <CardContent className="p-8">
               <h3 className="text-2xl font-bold mb-6">Отправить заявку</h3>
               <form onSubmit={handleSubmit} className="space-y-4">
