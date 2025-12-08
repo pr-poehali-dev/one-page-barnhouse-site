@@ -17,7 +17,7 @@ const HeroSection = ({ isVisible, scrollToSection }: HeroSectionProps) => {
               Строим дома под ключ с 2014 года
             </Badge>
             <h2 className="text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
-              Дома в стиле<br />Barn House
+              Дома Бизнес класса<br />в стиле Barn House
             </h2>
             <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
               Создаем современные энергоэффективные дома из натуральных материалов.
