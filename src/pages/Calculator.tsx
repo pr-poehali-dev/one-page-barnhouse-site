@@ -40,8 +40,8 @@ const Calculator = () => {
     const heatingPrice = state.area * prices.heating[state.heating];
     const finishingPrice = state.area * prices.finishing[state.finishing];
 
-    const smartHomePrice = prices.smartHome[state.smartHome];
-    const exteriorFinishPrice = prices.exteriorFinish[state.exteriorFinish];
+    const smartHomePrice = prices.smartHome[state.smartHome] * state.area;
+    const exteriorFinishPrice = prices.exteriorFinish[state.exteriorFinish] * state.area;
 
     const extrasPrice =
       (state.hasGarage ? prices.extras.garage : 0) +

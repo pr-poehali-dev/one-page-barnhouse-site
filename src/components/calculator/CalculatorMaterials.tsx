@@ -106,7 +106,7 @@ const CalculatorMaterials = ({ state, setState }: CalculatorMaterialsProps) => {
                       {key.charAt(0).toUpperCase() + key.slice(1)}
                     </div>
                     <div className="text-xs text-muted-foreground">
-                      {price === 0 ? 'Без отделки' : `${formatPrice(price)} ₽`}
+                      {price === 0 ? 'Без отделки' : `${formatPrice(price * state.area)} ₽`}
                     </div>
                   </button>
                 ))}
@@ -236,7 +236,7 @@ const CalculatorMaterials = ({ state, setState }: CalculatorMaterialsProps) => {
                       {key.charAt(0).toUpperCase() + key.slice(1)}
                     </div>
                     <div className="text-xs text-muted-foreground">
-                      {price === 0 ? 'Без системы' : `${formatPrice(price)} ₽`}
+                      {price === 0 ? 'Без системы' : `${formatPrice(price * state.area)} ₽`}
                     </div>
                   </button>
                 ))}
