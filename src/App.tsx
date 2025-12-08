@@ -8,7 +8,9 @@ import Index from "./pages/Index";
 import Catalog from "./pages/Catalog";
 import ProjectDetail from "./pages/ProjectDetail";
 import Calculator from "./pages/Calculator";
+import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
+import CookieConsent from "./components/CookieConsent";
 
 const queryClient = new QueryClient();
 
@@ -23,9 +25,11 @@ const App = () => (
           <Route path="/catalog" element={<Catalog />} />
           <Route path="/catalog/:id" element={<ProjectDetail />} />
           <Route path="/calculator" element={<Calculator />} />
+          <Route path="/privacy" element={<Privacy />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <CookieConsent />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

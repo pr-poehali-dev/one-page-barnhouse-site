@@ -149,7 +149,10 @@ const ContactSection = () => {
                   {isSubmitting ? 'Отправка...' : 'Отправить заявку'}
                 </Button>
                 <p className="text-xs text-muted-foreground text-center">
-                  Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности
+                  Нажимая кнопку, вы соглашаетесь с{' '}
+                  <a href="/privacy" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">
+                    политикой обработки персональных данных
+                  </a>
                 </p>
               </form>
             </CardContent>

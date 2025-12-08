@@ -57,6 +57,11 @@ const Footer = ({ scrollToSection }: FooterProps) => {
         </div>
         <div className="border-t border-background/20 pt-8 text-center text-sm opacity-80">
           <p>© 2024 BarnHouse. Все права защищены.</p>
+          <div className="mt-2">
+            <a href="/privacy" className="hover:text-primary transition-colors">
+              Политика обработки персональных данных
+            </a>
+          </div>
         </div>
       </div>
     </footer>
