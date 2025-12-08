@@ -22,10 +22,11 @@ const Calculator = () => {
     insulation: 'базовая',
     heating: 'электрическое',
     finishing: 'черновая',
+    smartHome: 'нет',
+    exteriorFinish: 'нет',
     hasGarage: false,
     hasSauna: false,
     hasTerrace: false,
-    hasSmartHome: false,
   });
 
   const [totalPrice, setTotalPrice] = useState(0);
@@ -39,11 +40,13 @@ const Calculator = () => {
     const heatingPrice = state.area * prices.heating[state.heating];
     const finishingPrice = state.area * prices.finishing[state.finishing];
 
+    const smartHomePrice = prices.smartHome[state.smartHome];
+    const exteriorFinishPrice = prices.exteriorFinish[state.exteriorFinish];
+
     const extrasPrice =
       (state.hasGarage ? prices.extras.garage : 0) +
       (state.hasSauna ? prices.extras.sauna : 0) +
-      (state.hasTerrace ? prices.extras.terrace : 0) +
-      (state.hasSmartHome ? prices.extras.smartHome : 0);
+      (state.hasTerrace ? prices.extras.terrace : 0);
 
     const total =
       basePrice +
@@ -53,6 +56,8 @@ const Calculator = () => {
       insulationPrice +
       heatingPrice +
       finishingPrice +
+      smartHomePrice +
+      exteriorFinishPrice +
       extrasPrice;
 
     setTotalPrice(Math.round(total));

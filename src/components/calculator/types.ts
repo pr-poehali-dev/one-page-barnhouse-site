@@ -8,10 +8,11 @@ export interface CalculatorState {
   insulation: 'базовая' | 'улучшенная' | 'премиум';
   heating: 'электрическое' | 'газовое' | 'тепловой-насос';
   finishing: 'черновая' | 'чистовая' | 'премиум';
+  smartHome: 'нет' | 'стандарт' | 'премиум' | 'люкс';
+  exteriorFinish: 'нет' | 'планкен' | 'кирпич' | 'металл';
   hasGarage: boolean;
   hasSauna: boolean;
   hasTerrace: boolean;
-  hasSmartHome: boolean;
 }
 
 export const prices = {
@@ -50,11 +51,22 @@ export const prices = {
     'чистовая': 33750,
     'премиум': 56250,
   },
+  smartHome: {
+    'нет': 0,
+    'стандарт': 1750000,
+    'премиум': 2300000,
+    'люкс': 5200000,
+  },
+  exteriorFinish: {
+    'нет': 0,
+    'планкен': 800000,
+    'кирпич': 1400000,
+    'металл': 600000,
+  },
   extras: {
     garage: 1800000,
     sauna: 1012500,
     terrace: 405000,
-    smartHome: 787500,
   },
 };
 

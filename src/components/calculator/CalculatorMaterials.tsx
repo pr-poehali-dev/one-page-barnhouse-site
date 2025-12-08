@@ -88,6 +88,30 @@ const CalculatorMaterials = ({ state, setState }: CalculatorMaterialsProps) => {
                 ))}
               </div>
             </div>
+
+            <div>
+              <label className="block text-sm font-semibold mb-3">Внешняя отделка стен</label>
+              <div className="grid md:grid-cols-4 gap-3">
+                {Object.entries(prices.exteriorFinish).map(([key, price]) => (
+                  <button
+                    key={key}
+                    onClick={() => setState({ ...state, exteriorFinish: key as any })}
+                    className={`p-4 rounded-lg border-2 transition-all text-left ${
+                      state.exteriorFinish === key
+                        ? 'border-primary bg-primary/10'
+                        : 'border-border hover:border-primary/50'
+                    }`}
+                  >
+                    <div className="font-semibold text-sm mb-1">
+                      {key.charAt(0).toUpperCase() + key.slice(1)}
+                    </div>
+                    <div className="text-xs text-muted-foreground">
+                      {price === 0 ? 'Без отделки' : `${formatPrice(price)} ₽`}
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
         </CardContent>
       </Card>
@@ -189,6 +213,30 @@ const CalculatorMaterials = ({ state, setState }: CalculatorMaterialsProps) => {
                     </div>
                     <div className="text-xs text-muted-foreground">
                       {formatPrice(price * state.area)} ₽
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold mb-3">Умный дом</label>
+              <div className="grid md:grid-cols-4 gap-3">
+                {Object.entries(prices.smartHome).map(([key, price]) => (
+                  <button
+                    key={key}
+                    onClick={() => setState({ ...state, smartHome: key as any })}
+                    className={`p-4 rounded-lg border-2 transition-all text-left ${
+                      state.smartHome === key
+                        ? 'border-primary bg-primary/10'
+                        : 'border-border hover:border-primary/50'
+                    }`}
+                  >
+                    <div className="font-semibold text-sm mb-1">
+                      {key.charAt(0).toUpperCase() + key.slice(1)}
+                    </div>
+                    <div className="text-xs text-muted-foreground">
+                      {price === 0 ? 'Без системы' : `${formatPrice(price)} ₽`}
                     </div>
                   </button>
                 ))}
