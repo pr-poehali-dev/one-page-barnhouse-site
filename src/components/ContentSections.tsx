@@ -96,9 +96,11 @@ const ContentSections = ({
                       </Badge>
                     ))}
                   </div>
-                  <Button className="w-full" onClick={() => scrollToSection('контакты')}>
-                    Получить расчет
-                  </Button>
+                  <Link to="/calculator" className="w-full">
+                    <Button className="w-full">
+                      Получить расчет
+                    </Button>
+                  </Link>
                 </CardContent>
               </Card>
             ))}
@@ -176,9 +178,11 @@ const ContentSections = ({
           </div>
           <div className="mt-12 text-center">
             <p className="text-lg mb-4">Общий срок строительства: <span className="font-bold text-primary">4-6 месяцев</span></p>
-            <Button size="lg" onClick={() => scrollToSection('контакты')}>
-              Рассчитать сроки для моего проекта
-            </Button>
+            <Link to="/calculator">
+              <Button size="lg">
+                Рассчитать сроки для моего проекта
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
