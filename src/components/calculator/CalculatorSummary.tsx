@@ -161,7 +161,7 @@ ${calculatorDetails}`,
           <form onSubmit={handleSubmit} className="space-y-3">
             <Input name="name" placeholder="Ваше имя" required className={errors.name ? 'border-red-500' : ''} />
             {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
-            <Input name="phone" type="tel" placeholder="+7 905 710 8890" required className={errors.phone ? 'border-red-500' : ''} />
+            <Input name="phone" type="tel" placeholder="+7 977 634 1129" required className={errors.phone ? 'border-red-500' : ''} />
             {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
             <Input name="email" type="email" placeholder="Email" className={errors.email ? 'border-red-500' : ''} />
             {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}

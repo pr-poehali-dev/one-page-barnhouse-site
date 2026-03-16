@@ -137,7 +137,7 @@ const Privacy = () => {
             </p>
             <div className="text-muted-foreground space-y-2">
               <p>Email: pruddzen@gmail.com</p>
-              <p>Телефон: +7 905 710 8890</p>
+              <p>Телефон: +7 977 634 1129</p>
               <p>Адрес: г. Москва, ул. Строителей, д. 15</p>
             </div>
           </section>

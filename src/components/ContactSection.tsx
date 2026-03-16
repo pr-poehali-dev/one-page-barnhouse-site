@@ -124,7 +124,7 @@ const ContactSection = () => {
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-2">Телефон</label>
-                  <Input name="phone" type="tel" placeholder="+7 905 710 8890" required className={errors.phone ? 'border-red-500' : ''} />
+                  <Input name="phone" type="tel" placeholder="+7 977 634 1129" required className={errors.phone ? 'border-red-500' : ''} />
                   {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
                 </div>
                 <div>
@@ -166,9 +166,10 @@ const ContactSection = () => {
                     <Icon name="Phone" className="text-primary mt-1" size={20} />
                     <div>
                       <div className="font-semibold">Телефон</div>
-                      <a href="tel:+79057108890" className="text-muted-foreground hover:text-primary">
-                        +7 905 710 8890
+                      <a href="tel:+79776341129" className="text-muted-foreground hover:text-primary">
+                        +7 977 634 1129
                       </a>
+                      <div className="text-sm text-muted-foreground mt-1">Manager: +7 977 634 1129</div>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
