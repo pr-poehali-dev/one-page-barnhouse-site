@@ -166,8 +166,8 @@ const ContactSection = () => {
                     <Icon name="Phone" className="text-primary mt-1" size={20} />
                     <div>
                       <div className="font-semibold">Телефон</div>
-                      <a href="tel:+79776341129" className="text-muted-foreground hover:text-primary">
-                        +7 977 634 1129
+                      <a href="tel:+79057108890" className="text-muted-foreground hover:text-primary">
+                        +7 905 710 88 90
                       </a>
                       <div className="font-semibold mt-2">Менеджер</div>
                       <a href="tel:+79776341129" className="text-muted-foreground hover:text-primary">
