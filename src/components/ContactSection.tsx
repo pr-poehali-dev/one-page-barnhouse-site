@@ -169,7 +169,10 @@ const ContactSection = () => {
                       <a href="tel:+79776341129" className="text-muted-foreground hover:text-primary">
                         +7 977 634 1129
                       </a>
-                      <div className="text-sm text-muted-foreground mt-1">Manager: +7 977 634 1129</div>
+                      <div className="font-semibold mt-2">Менеджер</div>
+                      <a href="tel:+79776341129" className="text-muted-foreground hover:text-primary">
+                        +7 977 634 1129
+                      </a>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
